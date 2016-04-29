@@ -16,7 +16,7 @@ module.exports = {
     filename: 'bundle.js'
   },
   resolve: {
-    extensions: ['', '.js', '.ts']
+    extensions: ['', '.js']
   },
   // Adding jquery here makes it global for the app, no import needed
   plugins: [
@@ -29,10 +29,12 @@ module.exports = {
       allChunks: true
     }),
     new AureliaWebpackPlugin(),
-    new ProvidePlugin({
-      Promise: 'bluebird'
-    })
+    // new ProvidePlugin({
+    //   Promise: 'bluebird'
+    // })
   ],
+  // for dev server make sure in package.json dev script that --devtool source-map not eval production version has
+  //correct setting for source-map
   devtool: 'source-map',
   devServer: {
     host: 'localhost',
@@ -51,7 +53,7 @@ module.exports = {
         loader: ExtractTextPlugin.extract('style-loader', 'css-loader')
       },
       //You still need css for files that are not .scss but jus .css
-      //{ test: /\.css?$/, loader: 'style!css' },
+      //  { test: /\.css?$/, loader: 'style!css' },
       {
         loader: "babel-loader",
         // Skip any files outside of your project's `src` directory
@@ -62,11 +64,10 @@ module.exports = {
         test: /\.js?$/,
         // Options to configure babel with
         query: {
-      presets: ['es2015-loose', 'stage-1'], plugins: ['transform-decorators-legacy']
+          presets: ['es2015-loose', 'stage-1'], plugins: ['transform-decorators-legacy']
         }
       },
       { test: /\.html$/, loader: 'html' },
-     // { test: /\.js$/, loader: 'babel', exclude: /node_modules/, query: { presets: ['es2015-loose', 'stage-1'], plugins: ['transform-decorators-legacy'] } },
       { test: /\.(png|gif|jpg)$/, loader: 'url', query: { limit: 8192 } },
       { test: /\.woff2(\?v=[0-9]\.[0-9]\.[0-9])?$/, loader: 'url', query: { limit: 10000, mimetype: 'application/font-woff2' } },
       { test: /\.woff(\?v=[0-9]\.[0-9]\.[0-9])?$/, loader: 'url', query: { limit: 10000, mimetype: 'application/font-woff' } },
@@ -78,8 +79,8 @@ module.exports = {
     autoprefixer({
       browsers: ['last 2 versions']
     })
-  ],
-  sassLoader: {
-    includePaths: [path.resolve(__dirname, "./sass")]
-  }
+  ]
+  // sassLoader: {
+  //   includePaths: [path.resolve(__dirname, "sass")]
+  // }
 };

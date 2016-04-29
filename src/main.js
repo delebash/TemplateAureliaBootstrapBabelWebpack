@@ -1,4 +1,4 @@
-var Promise = require('bluebird'); // Promise polyfill for IE11
+//var Promise = require('bluebird'); // Promise polyfill for IE11
 import {Aurelia} from 'aurelia-framework';
 import {bootstrap as webpackbootstrap} from 'aurelia-bootstrapper-webpack';
 import $ from 'jquery'
@@ -6,7 +6,7 @@ import bootstrap from 'bootstrap'
 
 import '../node_modules/bootstrap/dist/css/bootstrap.css';
 import '../node_modules/font-awesome/css/font-awesome.css';
-import '../styles/styles.css';
+//import '../styles/styles.css';
 import'../sass/styles.scss'
 
 webpackbootstrap(function(aurelia) {
